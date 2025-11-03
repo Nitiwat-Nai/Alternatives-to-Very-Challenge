@@ -6,18 +6,124 @@
     <title>Alternatives to "Very" Challenge (Level 1-20)</title>
     <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;700;900&display=swap" rel="stylesheet">
     <style>
-        /* Pastel Purple-Pink Theme (Consistent across all 20 Levels) */
+        /* --- 1. Global & Default Theme (Level 1-10): Pink-Purple Theme --- */
         :root {
-            --color-primary: #8E24AA; /* Deep Purple */
-            --color-secondary: #FF80AB; /* Pink Accent */
-            --color-correct: #66BB6A; /* Green */
-            --color-wrong: #EF5350; /* Red */
-            --color-bg: #F3E5F5; /* Light Lavender Background */
+            /* Pink for primary elements (Header, Next Button, Prompt Border) */
+            --color-primary: #E91E63; 
+            /* Darker Pink for default secondary button colors */
+            --color-secondary: #C2185B; 
+            --color-correct: #4CAF50; /* Green */
+            --color-wrong: #F44336; /* Red */
+            /* Very Light Pink Background */
+            --color-bg: #FCE4EC; 
             --color-card: #FFFFFF;
-            --color-text-dark: #4A148C; /* Very Dark Purple */
+            /* Deep Purple Text for contrast */
+            --color-text-dark: #311B92; 
             --color-text-light: #FFFFFF;
         }
 
+        /* 1.1 Level 1-10 Level Buttons (Pink) */
+        .level-btn {
+            background-color: #F06292; /* Light Pink for level buttons */
+            box-shadow: 0 4px 0 #E91E63; /* Deep Pink shadow */
+            color: var(--color-text-light);
+        }
+        .level-btn:active {
+            box-shadow: 0 2px 0 #E91E63;
+        }
+
+        /* 1.2 Default Choice Buttons (Light Blue/Cyan from original, let's make it a nice Pink) */
+        .choice-button {
+            background-color: #FF80AB; /* Pink A100/500 */
+            color: var(--color-text-dark);
+            box-shadow: 0 5px 0 #F50057;
+        }
+        .choice-button:not([disabled]):active { 
+            transform: translateY(3px); 
+            box-shadow: 0 2px 0 #F50057; 
+        }
+
+        /* 1.3 Default Header/Next Button Colors */
+        header {
+            background-color: var(--color-primary);
+            color: var(--color-text-light);
+        }
+        #next-btn {
+            background-color: var(--color-primary);
+            box-shadow: 0 4px 0 #C2185B;
+        }
+        #next-btn:active {
+            box-shadow: 0 2px 0 #C2185B;
+        }
+
+        /* --- 2. Hard/Expert Theme (Level 11-20): Purple-Pink Theme --- */
+        .container.hard-theme {
+            background-color: #EDE7F6; /* Very Light Purple/Lavender background */
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            color: #4A148C; /* Deep Purple text */
+        }
+        .container.hard-theme header {
+            background-color: #4A148C; /* Deep Purple Header */
+            color: #F8BBD0; /* Light Pink Text */
+        }
+        .container.hard-theme header h1 { color: #F8BBD0; }
+
+        /* 2.1 Level 11-20 Level Buttons (Purple) */
+        .container.hard-theme .level-btn {
+            background-color: #9C27B0; /* Purple for level buttons */
+            box-shadow: 0 4px 0 #7B1FA2;
+        }
+        .container.hard-theme .level-btn:active {
+            box-shadow: 0 2px 0 #7B1FA2;
+        }
+
+        /* 2.2 Hard Theme Choice Buttons (Pink/Magenta) */
+        .container.hard-theme .choice-button {
+            background-color: #FF4081; /* Deep Pink A200 */
+            color: var(--color-text-light);
+            box-shadow: 0 5px 0 #C51162;
+        }
+        .container.hard-theme .choice-button:not([disabled]):active { 
+            box-shadow: 0 2px 0 #C51162; 
+        }
+
+        .container.hard-theme #prompt-area {
+            background-color: #EDE7F6; /* Light Purple prompt background */
+            border: 3px solid #673AB7; /* Deep Purple Border */
+        }
+        .container.hard-theme #main-prompt {
+            color: #673AB7; /* Deep Purple Prompt */
+        }
+        .container.hard-theme #timer-bar-container {
+            background-color: #D1C4E9;
+        }
+        .container.hard-theme #timer-bar {
+            background-color: #7B1FA2; /* Darker Purple for Timer */
+        }
+        
+        /* 2.3 Hard Theme Next Button (Dark Purple) */
+        .container.hard-theme #next-btn {
+            background-color: #673AB7; /* Deep Purple Next Button */
+            color: var(--color-text-light);
+            box-shadow: 0 4px 0 #512DA8;
+        }
+        .container.hard-theme #next-btn:active {
+            box-shadow: 0 2px 0 #512DA8;
+        }
+        
+        /* 2.4 Hard Theme Auto Toggle Button */
+        .container.hard-theme #auto-toggle-btn {
+             background-color: #558B2F; /* Dark Green */
+             box-shadow: 0 4px 0 #33691E;
+        }
+        .container.hard-theme #auto-toggle-btn.auto-active {
+            background-color: #B71C1C; /* Deep Red for Stop */
+            box-shadow: 0 4px 0 #7F0000;
+        }
+
+        /* --- END THEME MODIFICATIONS --- */
+        
+        /* Generic Styles (kept from original) */
         body {
             font-family: 'Sarabun', sans-serif;
             background-color: var(--color-bg);
@@ -30,7 +136,6 @@
             min-height: 100vh;
             text-align: center;
         }
-
         .container {
             width: 100%;
             max-width: 500px;
@@ -44,11 +149,7 @@
             padding: 0;
             transition: all 0.5s ease;
         }
-
-        /* Header */
         header {
-            background-color: var(--color-primary);
-            color: var(--color-text-light);
             padding: 1.5rem 1rem;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
             margin-bottom: 1rem;
@@ -58,8 +159,6 @@
             font-size: 1.8rem;
             margin: 0;
         }
-
-        /* Screen Management */
         .screen {
             padding: 1rem;
             display: none; 
@@ -70,11 +169,6 @@
         .screen.active {
             display: flex;
         }
-
-        /* --- Level Selection Screen --- */
-        #level-select-screen h2 {
-            color: var(--color-primary);
-        }
         #level-select-screen .level-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -82,20 +176,13 @@
             padding: 1rem 0;
         }
         .level-btn {
-            background-color: var(--color-secondary);
-            color: var(--color-text-light);
             border: none;
             padding: 1.5rem 0.5rem;
             border-radius: 8px;
             font-size: 1.4rem;
             font-weight: bold;
             cursor: pointer;
-            box-shadow: 0 4px 0 #F50057; /* Darker Pink */
             transition: transform 0.1s, box-shadow 0.1s;
-        }
-        .level-btn:active {
-            transform: translateY(2px);
-            box-shadow: 0 2px 0 #F50057;
         }
         .level-btn-title {
             font-size: 0.8rem;
@@ -103,8 +190,51 @@
             display: block;
             margin-top: 5px;
         }
-        
-        /* --- Game Screen --- */
+        #mode-select-screen .mode-btn-group {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            padding: 1rem 0;
+            flex-grow: 1;
+            justify-content: center;
+        }
+        .mode-btn {
+            border: none;
+            padding: 1.5rem;
+            border-radius: 10px;
+            font-size: 1.3rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.1s, box-shadow 0.1s;
+            color: var(--color-text-dark);
+        }
+        #start-normal-btn {
+            background-color: var(--color-primary);
+            color: var(--color-text-light);
+            box-shadow: 0 5px 0 var(--color-secondary);
+        }
+        #start-normal-btn:active {
+            transform: translateY(2px);
+            box-shadow: 0 3px 0 var(--color-secondary);
+        }
+        #start-auto-btn {
+            background-color: #FFC107; /* Amber for Auto */
+            box-shadow: 0 5px 0 #FFB300;
+        }
+        #start-auto-btn:active {
+            transform: translateY(2px);
+            box-shadow: 0 3px 0 #FFB300;
+        }
+        #back-to-level-btn {
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+            background-color: #B0BEC5; 
+            box-shadow: 0 5px 0 #90A4AE;
+        }
+        #back-to-level-btn:active {
+            transform: translateY(2px);
+            box-shadow: 0 3px 0 #90A4AE;
+        }
         #game-screen .status-bar {
             display: flex;
             justify-content: space-between;
@@ -112,12 +242,9 @@
             padding: 0.5rem 0;
             font-weight: bold;
             margin-bottom: 1.5rem;
-            color: var(--color-primary);
         }
-
-        /* Prompt Area (Main English Word) */
         #prompt-area {
-            background-color: #EDE7F6; /* Lightest Purple */
+            background-color: var(--color-bg);
             border: 3px solid var(--color-primary);
             border-radius: 20px;
             padding: 2rem 1rem;
@@ -130,17 +257,15 @@
             transition: all 0.5s ease;
         }
         #main-prompt {
-            font-size: 2.5rem; /* Larger font for main word */
+            font-size: 2.5rem;
             font-weight: 900;
             color: var(--color-primary);
             line-height: 1.3;
         }
-
-        /* Timer Bar */
         #timer-bar-container {
             width: 100%;
             height: 10px;
-            background-color: #E1BEE7; /* Lighter background */
+            background-color: #BBDEFB;
             border-radius: 5px;
             margin-bottom: 1rem;
             overflow: hidden;
@@ -151,8 +276,6 @@
             background-color: var(--color-secondary);
             transition: width 5s linear;
         }
-
-        /* Choice Buttons */
         #choices {
             display: flex;
             flex-direction: column;
@@ -161,54 +284,64 @@
             justify-content: center; 
         }
         .choice-button {
-            background-color: #AB47BC; /* Medium Purple */
-            color: var(--color-text-light);
             border: none;
             padding: 1.5rem;
             border-radius: 10px;
             font-size: 1.6rem;
             font-weight: bold;
             cursor: pointer;
-            box-shadow: 0 5px 0 #7B1FA2; /* Darker Purple */
             transition: all 0.2s ease-in-out;
-        }
-        .choice-button:not([disabled]):active { 
-            transform: translateY(3px); 
-            box-shadow: 0 2px 0 #7B1FA2; 
         }
         .choice-button:disabled {
             opacity: 0.6;
             cursor: not-allowed;
             pointer-events: none;
         }
-
-        /* Feedback Colors & Reveal */
         .choice-button.correct {
             background-color: var(--color-correct);
             box-shadow: 0 5px 0 #388E3C;
             font-size: 2.5rem; 
             transition: font-size 0.5s;
+            color: var(--color-text-light);
         }
         .choice-button.wrong {
             background-color: var(--color-wrong);
             box-shadow: 0 5px 0 #D32F2F;
+            color: var(--color-text-light);
         }
-        .choice-button.hidden-on-reveal {
-            opacity: 0;
-            height: 0;
-            padding: 0;
-            margin: 0;
-            transition: opacity 0.3s, height 0.3s, padding 0.3s, margin 0.3s;
-        }
-
-        /* Footer/Control */
         #game-footer {
             margin-top: 2rem;
             padding-top: 1rem;
-            border-top: 1px solid #E1BEE7;
+            border-top: 1px solid #BBDEFB;
+            display: flex;
+            gap: 10px;
+        }
+        #auto-toggle-btn {
+            background-color: var(--color-correct); 
+            color: var(--color-text-light);
+            border: none;
+            width: 40%;
+            padding: 1rem 0.5rem;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            box-shadow: 0 4px 0 #388E3C;
+            transition: all 0.1s;
+            display: none;
+        }
+        #auto-toggle-btn:active {
+            transform: translateY(2px);
+            box-shadow: 0 2px 0 #388E3C;
+        }
+        #auto-toggle-btn.auto-active {
+            background-color: var(--color-wrong); 
+            box-shadow: 0 4px 0 #D32F2F;
+        }
+        #auto-toggle-btn.auto-active:active {
+            box-shadow: 0 2px 0 #D32F2F;
         }
         #next-btn {
-            background-color: var(--color-primary);
             color: var(--color-text-light);
             border: none;
             width: 100%;
@@ -217,12 +350,16 @@
             font-size: 1.2rem;
             font-weight: bold;
             cursor: pointer;
-            box-shadow: 0 4px 0 #4A148C;
             transition: all 0.1s;
         }
         #next-btn:active {
             transform: translateY(2px);
-            box-shadow: 0 2px 0 #4A148C;
+        }
+        #game-footer.auto-mode #next-btn {
+            width: 60%;
+        }
+        #game-footer:not(.auto-mode) #next-btn {
+            width: 100%;
         }
     </style>
 </head>
@@ -230,17 +367,34 @@
 
     <div class="container" id="main-container">
         <header>
-            <h1>✨ Alternatives to "Very" Challenge (200 Words) ✨</h1>
+            <h1>Alternatives to "Very" Challenge (คำศัพท์แทนคำว่า "Very")</h1>
         </header>
 
         <div id="level-select-screen" class="screen active">
-            <h2>🏆 เลือกเลเวล (200 คำศัพท์)</h2>
-            <p>ฝึกแทนที่คำว่า "Very" ด้วยคำที่เหมาะสมกว่า:</p>
+            <h2>🏆 เลเวลที่ 1 - 20 (200 คำศัพท์)</h2>
+            <p>เลือกเลเวลที่คุณต้องการฝึกฝน:</p>
             <div class="level-grid" id="level-grid">
                 </div>
-            <p style="padding-top: 2rem; color:#9E9E9E;">20 เลเวล (10 ข้อต่อเลเวล)</p>
+            <p style="padding-top: 2rem; color:#9E9E9E;">มีทั้งหมด 20 เลเวล (200 คำศัพท์)</p>
         </div>
 
+        <div id="mode-select-screen" class="screen">
+            <h2 id="mode-level-title">Level X: Title</h2>
+            <p>เลือกโหมดการเล่นสำหรับเลเวลนี้:</p>
+            <div class="mode-btn-group">
+                <button id="start-normal-btn" class="mode-btn">
+                    👤 เริ่มเกม (โหมดปกติ)
+                    <span style="display:block; font-size: 0.8em; font-weight: 400;">ตอบเอง, เวลา 5 วินาที</span>
+                </button>
+                <button id="start-auto-btn" class="mode-btn">
+                    🤖 เล่นอัตโนมัติ (Auto Mode)
+                    <span style="display:block; font-size: 0.8em; font-weight: 400;">เฉลยอัตโนมัติ, เวลา 3.5 วินาที</span>
+                </button>
+            </div>
+            <button id="back-to-level-btn" class="mode-btn" style="width: 80%; background-color: #B0BEC5; box-shadow: 0 5px 0 #90A4AE;">
+                🔙 กลับไปหน้าเลือกเลเวล
+            </button>
+        </div>
         <div id="game-screen" class="screen">
             <div class="top-content">
                 <div class="status-bar">
@@ -255,7 +409,7 @@
 
                 <div id="prompt-area">
                     <span id="main-prompt">MAIN WORD HERE</span>
-                    <small id="thai-translation" style="margin-top: 0.5rem; font-weight: 400; font-size: 1rem; color: var(--color-primary);">(คำแปล)</small>
+                    <small id="thai-translation" style="margin-top: 0.5rem; font-weight: 400; font-size: 1rem; color: #66BB6A;">(คำแปล)</small>
                 </div>
 
                 <div id="choices">
@@ -265,266 +419,274 @@
             </div>
 
             <div id="game-footer">
+                <button id="auto-toggle-btn" style="display: none;">▶️ เริ่มเล่น (Auto)</button>
                 <button id="next-btn" disabled>ข้อถัดไป/กลับหน้าหลัก</button>
             </div>
         </div>
     </div>
 
     <script>
-        // --- DATA (20 Levels x 10 Questions = 200 words) ---
-        // Levels 1-10 (As provided in the first response)
+        // --- DATA (20 Levels x 10 Questions = 200 words) for Alternatives to "Very" ---
+        // *** IMPORTANT: antonymThai ถูกเปลี่ยนชื่อเป็น correctThai คือคำแปลของคำตอบที่ถูกต้อง จะถูกใช้แสดงตอนเฉลย ***
         const allQuizData = [
-            { level: 1, title: "ทั่วไป/พื้นฐาน", questions: [
-                { very: "Very angry", correct: "furious", decoy: "serious", thai: "โกรธมาก" },
-                { very: "Very bad", correct: "awful", decoy: "bitter", thai: "แย่มาก" },
-                { very: "Very big", correct: "enormous", decoy: "massive", thai: "ใหญ่มาก" },
-                { very: "Very boring", correct: "dull", decoy: "slow", thai: "น่าเบื่อมาก" },
-                { very: "Very bright", correct: "brilliant", decoy: "vivid", thai: "สว่างมาก" },
-                { very: "Very calm", correct: "serene", decoy: "quiet", thai: "สงบมาก" },
-                { very: "Very careful", correct: "cautious", decoy: "diligent", thai: "ระมัดระวังมาก" },
-                { very: "Very clean", correct: "spotless", decoy: "pristine", thai: "สะอาดมาก" },
-                { very: "Very cold", correct: "freezing", decoy: "icy", thai: "หนาวมาก" },
-                { very: "Very happy", correct: "joyful", decoy: "cheerful", thai: "มีความสุขมาก" },
+            { level: 1, title: "Level 1: Basic Adjectives 1", questions: [
+                { main: "VERY ANGRY", thai: "โกรธมาก", correct: "FURIOUS", correctThai: "โกรธจัด", decoy: "MAD" },
+                { main: "VERY TIRED", thai: "เหนื่อยมาก", correct: "EXHAUSTED", correctThai: "หมดแรง", decoy: "SLEEPY" },
+                { main: "VERY HUNGRY", thai: "หิวมาก", correct: "STARVING", correctThai: "อดอยาก/หิวโซ", decoy: "PECKISH" },
+                { main: "VERY COLD", thai: "หนาวมาก", correct: "FREEZING", correctThai: "เยือกแข็ง", decoy: "CHILLY" },
+                { main: "VERY BIG", thai: "ใหญ่มาก", correct: "HUGE", correctThai: "มหึมา", decoy: "LARGE" },
+                { main: "VERY SMALL", thai: "เล็กมาก", correct: "TINY", correctThai: "จิ๋ว", decoy: "LITTLE" },
+                { main: "VERY AFRAID", thai: "กลัวมาก", correct: "TERRIFIED", correctThai: "หวาดกลัว", decoy: "SCARED" },
+                { main: "VERY CROWDED", thai: "แออัดมาก", correct: "PACKED", correctThai: "อัดแน่น", decoy: "BUSY" },
+                { main: "VERY CLEVER", thai: "ฉลาดมาก", correct: "BRILLIANT", correctThai: "ยอดเยี่ยม", decoy: "SMART" },
+                { main: "VERY WET", thai: "เปียกมาก", correct: "SOAKED", correctThai: "เปียกโชก", decoy: "DAMP" },
             ]},
-            { level: 2, title: "อารมณ์/ความรู้สึก", questions: [
-                { very: "Very sad", correct: "miserable", decoy: "gloomy", thai: "เศร้ามาก" },
-                { very: "Very serious", correct: "grave", decoy: "solemn", thai: "จริงจังมาก" },
-                { very: "Very sorry", correct: "apologetic", decoy: "regretful", thai: "เสียใจมาก" },
-                { very: "Very sure", correct: "certain", decoy: "confident", thai: "แน่ใจมาก" },
-                { very: "Very sweet", correct: "sugary", decoy: "tasty", thai: "หวานมาก" },
-                { very: "Very angry", correct: "furious", decoy: "irate", thai: "โกรธมาก" },
-                { very: "Very cheerful", correct: "jubilant", decoy: "happy", thai: "ร่าเริงมาก" },
-                { very: "Very excited", correct: "thrilled", decoy: "eager", thai: "ตื่นเต้นมาก" },
-                { very: "Very fierce", correct: "ferocious", decoy: "violent", thai: "ดุร้ายมาก" },
-                { very: "Very worried", correct: "anxious", decoy: "stressed", thai: "กังวลมาก" },
+            { level: 2, title: "Level 2: Basic Adjectives 2", questions: [
+                { main: "VERY HAPPY", thai: "มีความสุขมาก", correct: "ECSTATIC", correctThai: "ปีติยินดี", decoy: "JOYFUL" },
+                { main: "VERY SAD", thai: "เศร้ามาก", correct: "SORROWFUL", correctThai: "โศกเศร้า", decoy: "UPSET" },
+                { main: "VERY GOOD", thai: "ดีมาก", correct: "EXCELLENT", correctThai: "ยอดเยี่ยม", decoy: "GREAT" },
+                { main: "VERY BAD", thai: "แย่มาก", correct: "AWFUL", correctThai: "น่ากลัว", decoy: "TERRIBLE" },
+                { main: "VERY INTERESTING", thai: "น่าสนใจมาก", correct: "CAPTIVATING", correctThai: "ดึงดูดใจ", decoy: "ENGAGING" },
+                { main: "VERY EASY", thai: "ง่ายมาก", correct: "EFFORTLESS", correctThai: "ไม่ใช้ความพยายาม", decoy: "SIMPLE" },
+                { main: "VERY DIFFICULT", thai: "ยากมาก", correct: "ARDUOUS", correctThai: "ลำบาก", decoy: "TOUGH" },
+                { main: "VERY BEAUTIFUL", thai: "สวยมาก", correct: "GORGEOUS", correctThai: "งดงาม", decoy: "PRETTY" },
+                { main: "VERY BRIGHT", thai: "สว่างมาก", correct: "LUMINOUS", correctThai: "เรืองแสง", decoy: "SHINY" },
+                { main: "VERY SLOW", thai: "ช้ามาก", correct: "SLUGGISH", correctThai: "เฉื่อยชา", decoy: "LAZY" },
             ]},
-            { level: 3, title: "คุณสมบัติ/ลักษณะ 1", questions: [
-                { very: "Very clear", correct: "obvious", decoy: "plain", thai: "ชัดเจนมาก" },
-                { very: "Very colorful", correct: "vibrant", decoy: "vivid", thai: "มีสีสันมาก" },
-                { very: "Very comfortable", correct: "cozy", decoy: "snug", thai: "สบายมาก" },
-                { very: "Very quick", correct: "swift", decoy: "rapid", thai: "เร็วมาก" },
-                { very: "Very important", correct: "crucial", decoy: "essential", thai: "สำคัญมาก" },
-                { very: "Very dirty", correct: "filthy", decoy: "grimy", thai: "สกปรกมาก" },
-                { very: "Very dry", correct: "parched", decoy: "arid", thai: "แห้งมาก" },
-                { very: "Very easy", correct: "effortless", decoy: "simple", thai: "ง่ายมาก" },
-                { very: "Very empty", correct: "vacant", decoy: "hollow", thai: "ว่างเปล่ามาก" },
-                { very: "Very good", correct: "excellent", decoy: "superb", thai: "ดีมาก" },
+            { level: 3, title: "Level 3: Common Adverbs", questions: [
+                { main: "VERY QUICKLY", thai: "รวดเร็วมาก", correct: "SWIFTLY", correctThai: "อย่างว่องไว", decoy: "FAST" },
+                { main: "VERY WELL", thai: "ดีมาก", correct: "SUPERBLY", correctThai: "อย่างยอดเยี่ยม", decoy: "NICELY" },
+                { main: "VERY OFTEN", thai: "บ่อยมาก", correct: "FREQUENTLY", correctThai: "เป็นประจำ", decoy: "REGULARLY" },
+                { main: "VERY CAREFULLY", thai: "ระวังมาก", correct: "METICULOUSLY", correctThai: "อย่างพิถีพิถัน", decoy: "PRECISELY" },
+                { main: "VERY LOUDLY", thai: "ดังมาก", correct: "DEAFENINGLY", correctThai: "ดังจนหูดับ", decoy: "NOISILY" },
+                { main: "VERY SILENTLY", thai: "เงียบมาก", correct: "SOUNDLESSLY", correctThai: "ไร้เสียง", decoy: "QUIETLY" },
+                { main: "VERY BADLY", thai: "แย่มาก", correct: "DREADFULLY", correctThai: "อย่างน่ากลัว", decoy: "TERRIBLY" },
+                { main: "VERY RARELY", thai: "ไม่ค่อยมี", correct: "SELDOM", correctThai: "ไม่บ่อย", decoy: "INFREQUENTLY" },
+                { main: "VERY EASILY", thai: "ง่ายดายมาก", correct: "FLUIDLY", correctThai: "อย่างราบรื่น", decoy: "SIMPLY" },
+                { main: "VERY DIFFERENTLY", thai: "แตกต่างมาก", correct: "DISTINCTLY", correctThai: "อย่างชัดเจน", decoy: "UNLIKE" },
             ]},
-            { level: 4, title: "ปริมาณ/ขนาด", questions: [
-                { very: "Very busy", correct: "swamped", decoy: "overloaded", thai: "ยุ่งมาก" },
-                { very: "Very busy", correct: "hectic", decoy: "occupied", thai: "ยุ่งมาก (อีกคำ)" },
-                { very: "Very heavy", correct: "weighty", decoy: "bulky", thai: "หนักมาก" },
-                { very: "Very large", correct: "massive", decoy: "huge", thai: "ใหญ่มาก" },
-                { very: "Very little", correct: "tiny", decoy: "minute", thai: "เล็กมาก" },
-                { very: "Very long", correct: "lengthy", decoy: "extended", thai: "ยาวมาก" },
-                { very: "Very loud", correct: "deafening", decoy: "noisy", thai: "ดังมาก" },
-                { very: "Very tasty", correct: "delicious", decoy: "savory", thai: "อร่อยมาก" },
-                { very: "Very thick", correct: "dense", decoy: "solid", thai: "หนามาก" },
-                { very: "Very tall", correct: "towering", decoy: "lofty", thai: "สูงมาก" },
+            { level: 4, title: "Level 4: Physical States", questions: [
+                { main: "VERY DRY", thai: "แห้งมาก", correct: "PARCHED", correctThai: "แห้งแล้ง", decoy: "DESERT" },
+                { main: "VERY TASTY", thai: "อร่อยมาก", correct: "DELICIOUS", correctThai: "โอชะ", decoy: "YUMMY" },
+                { main: "VERY PAINFUL", thai: "เจ็บปวดมาก", correct: "EXCRUCIATING", correctThai: "ทรมาน", decoy: "ACHING" },
+                { main: "VERY DANGEROUS", thai: "อันตรายมาก", correct: "PERILOUS", correctThai: "เต็มไปด้วยภัย", decoy: "HAZARDOUS" },
+                { main: "VERY DIRTY", thai: "สกปรกมาก", correct: "FILTHY", correctThai: "โสโครก", decoy: "MESSY" },
+                { main: "VERY THIRSTY", thai: "กระหายน้ำมาก", correct: "DEHYDRATED", correctThai: "ขาดน้ำ", decoy: "DRY" },
+                { main: "VERY HOT", thai: "ร้อนมาก", correct: "SWELTERING", correctThai: "ร้อนอบอ้าว", decoy: "BOILING" },
+                { main: "VERY CLEVER", thai: "ฉลาดมาก", correct: "INGENIOUS", correctThai: "มีไหวพริบ", decoy: "SHARP" },
+                { main: "VERY LATE", thai: "สายมาก", correct: "OVERDUE", correctThai: "เกินกำหนด", decoy: "DELAYED" },
+                { main: "VERY LONG", thai: "ยาวมาก", correct: "EXTENSIVE", correctThai: "กว้างขวาง", decoy: "ENDLESS" },
             ]},
-            { level: 5, title: "ความยาก/ความเร็ว", questions: [
-                { very: "Very quick", correct: "swift", decoy: "rapid", thai: "เร็วมาก" },
-                { very: "Very fast", correct: "rapid", decoy: "swift", thai: "เร็วมาก (อีกคำ)" },
-                { very: "Very hard", correct: "tough", decoy: "difficult", thai: "ยากมาก" },
-                { very: "Very simple", correct: "brief", decoy: "basic", thai: "ง่ายมาก/สั้นมาก" },
-                { very: "Very slow", correct: "lethargic", decoy: "sluggish", thai: "ช้ามาก" },
-                { very: "Very lazy", correct: "sluggish", decoy: "idle", thai: "ขี้เกียจมาก" },
-                { very: "Very fat", correct: "obese", decoy: "plump", thai: "อ้วนมาก" },
-                { very: "Very skinny", correct: "skeletal", decoy: "thin", thai: "ผอมมาก" },
-                { very: "Very tired", correct: "exhausted", decoy: "weary", thai: "เหนื่อยมาก" },
-                { very: "Very short", correct: "brief", decoy: "small", thai: "สั้นมาก" },
+            { level: 5, title: "Level 5: Abstract Concepts", questions: [
+                { main: "VERY IMPORTANT", thai: "สำคัญมาก", correct: "ESSENTIAL", correctThai: "จำเป็น", decoy: "CRUCIAL" },
+                { main: "VERY CLEAR", thai: "ชัดเจนมาก", correct: "OBVIOUS", correctThai: "ชัดแจ้ง", decoy: "PLAIN" },
+                { main: "VERY PERFECT", thai: "สมบูรณ์แบบมาก", correct: "FLAWLESS", correctThai: "ไร้ที่ติ", decoy: "IDEAL" },
+                { main: "VERY CONFUSED", thai: "สับสนมาก", correct: "PERPLEXED", correctThai: "งุนงง", decoy: "PUZZLED" },
+                { main: "VERY POWERFUL", thai: "มีอำนาจมาก", correct: "DOMINANT", correctThai: "ครอบงำ", decoy: "STRONG" },
+                { main: "VERY CREATIVE", thai: "สร้างสรรค์มาก", correct: "INNOVATIVE", correctThai: "สร้างสรรค์สิ่งใหม่", decoy: "ORIGINAL" },
+                { main: "VERY ACCURATE", thai: "แม่นยำมาก", correct: "PRECISE", correctThai: "เที่ยงตรง", decoy: "EXACT" },
+                { main: "VERY VALUABLE", thai: "มีค่ามาก", correct: "PRECIOUS", correctThai: "ล้ำค่า", decoy: "WORTHY" },
+                { main: "VERY FANCY", thai: "หรูหรามาก", correct: "LUXURIOUS", correctThai: "โอ่อ่า", decoy: "STYLISH" },
+                { main: "VERY GENEROUS", thai: "ใจกว้างมาก", correct: "MUNIFICENT", correctThai: "เอื้อเฟื้อ", decoy: "KIND" },
             ]},
-            { level: 6, title: "อุณหภูมิ/คุณภาพ", questions: [
-                { very: "Very hot", correct: "scorching", decoy: "sweltering", thai: "ร้อนมาก" },
-                { very: "Very cool", correct: "awesome", decoy: "great", thai: "เจ๋งมาก" },
-                { very: "Very bright", correct: "radiant", decoy: "shining", thai: "สว่างมาก" },
-                { very: "Very cold", correct: "icy", decoy: "chilly", thai: "หนาวมาก (อีกคำ)" },
-                { very: "Very dirty", correct: "grimy", decoy: "soiled", thai: "สกปรกมาก (อีกคำ)" },
-                { very: "Very good", correct: "excellent", decoy: "superb", thai: "ดีมาก (อีกคำ)" },
-                { very: "Very new", correct: "brand-new", decoy: "modern", thai: "ใหม่มาก" },
-                { very: "Very noisy", correct: "boisterous", decoy: "loud", thai: "เสียงดังมาก" },
-                { very: "Very quiet", correct: "silent", decoy: "hushed", thai: "เงียบมาก" },
-                { very: "Very strong", correct: "sturdy", decoy: "powerful", thai: "แข็งแรงมาก" },
+            // ข้อมูลสำหรับ Level 6-20
+            { level: 6, title: "Level 6: Intensity 1", questions: [
+                { main: "VERY SIMPLE", thai: "เรียบง่ายมาก", correct: "BASIC", correctThai: "พื้นฐาน", decoy: "EASY" },
+                { main: "VERY BRIGHT", thai: "สว่างมาก", correct: "DAZZLING", correctThai: "เจิดจ้า", decoy: "GLOWING" },
+                { main: "VERY SHARP", thai: "คมมาก", correct: "KEEN", correctThai: "เฉียบคม", decoy: "POINTY" },
+                { main: "VERY OLD", thai: "เก่ามาก", correct: "ANCIENT", correctThai: "โบราณ", decoy: "AGED" },
+                { main: "VERY QUIET", thai: "เงียบมาก", correct: "HUSHED", correctThai: "สงบ", decoy: "CALM" },
+                { main: "VERY RICH", thai: "รวยมาก", correct: "WEALTHY", correctThai: "มั่งคั่ง", decoy: "AFFLUENT" },
+                { main: "VERY POOR", thai: "จนมาก", correct: "DESTITUTE", correctThai: "ขัดสน", decoy: "IMPOVERISHED" },
+                { main: "VERY WIDE", thai: "กว้างมาก", correct: "EXPANSIVE", correctThai: "แผ่กว้าง", decoy: "BROAD" },
+                { main: "VERY SCARY", thai: "น่ากลัวมาก", correct: "CHILLING", correctThai: "น่าขนลุก", decoy: "FRIGHTENING" },
+                { main: "VERY FAST", thai: "เร็วมาก", correct: "RAPID", correctThai: "รวดเร็ว", decoy: "QUICK" },
             ]},
-            { level: 7, title: "ลึกลับ/ซับซ้อน", questions: [
-                { very: "Very happy", correct: "jubilant", decoy: "overjoyed", thai: "มีความสุขมาก" },
-                { very: "Very hungry", correct: "starving", decoy: "famished", thai: "หิวมาก" },
-                { very: "Very angry", correct: "furious", decoy: "irate", thai: "โกรธมาก" },
-                { very: "Very confused", correct: "perplexed", decoy: "baffled", thai: "สับสนมาก" },
-                { very: "Very messy", correct: "chaotic", decoy: "disorganized", thai: "ยุ่งเหยิงมาก" },
-                { very: "Very neat", correct: "immaculate", decoy: "tidy", thai: "เรียบร้อยมาก" },
-                { very: "Very nervous", correct: "apprehensive", decoy: "stressed", thai: "กังวลมาก" },
-                { very: "Very scared", correct: "terrified", decoy: "frightened", thai: "กลัวมาก" },
-                { very: "Very smart", correct: "brilliant", decoy: "clever", thai: "ฉลาดมาก" },
-                { very: "Very stupid", correct: "foolish", decoy: "idiotic", thai: "โง่มาก" },
+            { level: 7, title: "Level 7: Adjective Deep Dive 1", questions: [
+                { main: "VERY WARM", thai: "อบอุ่นมาก", correct: "HEATED", correctThai: "ร้อน", decoy: "TOASTY" },
+                { main: "VERY QUICK", thai: "รวดเร็วมาก", correct: "PROMPT", correctThai: "ทันที", decoy: "IMMEDIATE" },
+                { main: "VERY CLEAN", thai: "สะอาดมาก", correct: "SPOTLESS", correctThai: "ไร้ที่ติ", decoy: "PURE" },
+                { main: "VERY TALL", thai: "สูงมาก", correct: "TOWRING", correctThai: "สูงตระหง่าน", decoy: "HIGH" },
+                { main: "VERY STRONG", thai: "แข็งแรงมาก", correct: "VIGOROUS", correctThai: "กระฉับกระเฉง", decoy: "POWERFUL" },
+                { main: "VERY WEAK", thai: "อ่อนแอมาก", correct: "FRAIL", correctThai: "เปราะบาง", decoy: "FEEBLE" },
+                { main: "VERY SHOCKED", thai: "ตกใจมาก", correct: "ASTOUNDED", correctThai: "ตะลึง", decoy: "SURPRISED" },
+                { main: "VERY USEFUL", thai: "มีประโยชน์มาก", correct: "PRODUCTIVE", correctThai: "มีผลผลิต", decoy: "HELPFUL" },
+                { main: "VERY WORRIED", thai: "กังวลมาก", correct: "ANXIOUS", correctThai: "กระวนกระวาย", decoy: "CONCERNED" },
+                { main: "VERY SHORT", thai: "สั้นมาก", correct: "BRIEF", correctThai: "กระชับ", decoy: "COMPACT" },
             ]},
-            { level: 8, title: "หายาก/ลบ", questions: [
-                { very: "Very old", correct: "ancient", decoy: "aged", thai: "เก่าแก่มาก" },
-                { very: "Very painful", correct: "excruciating", decoy: "agonizing", thai: "เจ็บปวดมาก" },
-                { very: "Very deep", correct: "profound", decoy: "bottomless", thai: "ลึกมาก" },
-                { very: "Very happy", correct: "jovial", decoy: "thrilled", thai: "มีความสุขมาก" },
-                { very: "Very difficult", correct: "arduous", decoy: "challenging", thai: "ยากมาก" },
-                { very: "Very expensive", correct: "costly", decoy: "extravagant", thai: "แพงมาก" },
-                { very: "Very rough", correct: "rugged", decoy: "coarse", thai: "ขรุขระมาก" },
-                { very: "Very rich", correct: "wealthy", decoy: "affluent", thai: "รวยมาก" },
-                { very: "Very sad", correct: "sorrowful", decoy: "doleful", thai: "เศร้ามาก" },
-                { very: "Very ugly", correct: "hideous", decoy: "repulsive", thai: "น่าเกลียดมาก" },
+            { level: 8, title: "Level 8: Feelings & Emotions 1", questions: [
+                { main: "VERY BORED", thai: "เบื่อมาก", correct: "JADED", correctThai: "เหนื่อยหน่าย", decoy: "DULL" },
+                { main: "VERY KIND", thai: "ใจดีมาก", correct: "COMPASSIONATE", correctThai: "เห็นอกเห็นใจ", decoy: "GENTLE" },
+                { main: "VERY EXCITED", thai: "ตื่นเต้นมาก", correct: "THIRLLED", correctThai: "ตื่นเต้นสุดขีด", decoy: "EAGER" },
+                { main: "VERY NERVOUS", thai: "ประหม่ามาก", correct: "APPREHENSIVE", correctThai: "หวั่นเกรง", decoy: "TENSE" },
+                { main: "VERY ASHAMED", thai: "ละอายใจมาก", correct: "MORTIFIED", correctThai: "อับอายสุดๆ", decoy: "EMBARRASSED" },
+                { main: "VERY CONFIDENT", thai: "มั่นใจมาก", correct: "ASSERTIVE", correctThai: "ยืนยันหนักแน่น", decoy: "SURE" },
+                { main: "VERY PROUD", thai: "ภูมิใจมาก", correct: "ELATED", correctThai: "ปลาบปลื้ม", decoy: "HONORED" },
+                { main: "VERY LOVELY", thai: "น่ารักมาก", correct: "ADORABLE", correctThai: "น่าบูชา", decoy: "CHARMING" },
+                { main: "VERY NASTY", thai: "น่ารังเกียจมาก", correct: "VILE", correctThai: "ชั่วร้าย", decoy: "HORRIBLE" },
+                { main: "VERY SILLY", thai: "โง่มาก", correct: "LUDICROUS", correctThai: "น่าหัวเราะเยาะ", decoy: "FOOLISH" },
             ]},
-            { level: 9, title: "คำคุณศัพท์ชั้นสูง 1", questions: [
-                { very: "Very nice", correct: "kind", decoy: "pleasant", thai: "ดีมาก (นิสัย)" },
-                { very: "Very open", correct: "transparent", decoy: "obvious", thai: "เปิดเผยมาก" },
-                { very: "Very poor", correct: "destitute", decoy: "penniless", thai: "จนมาก" },
-                { very: "Very powerful", correct: "mighty", decoy: "dominant", thai: "ทรงพลังมาก" },
-                { very: "Very pretty", correct: "lovely", decoy: "gorgeous", thai: "สวยมาก" },
-                { very: "Very good", correct: "superb", decoy: "splendid", thai: "ดีมาก (อีกคำ)" },
-                { very: "Very rare", correct: "exceptional", decoy: "unique", thai: "หายากมาก" },
-                { very: "Very wet", correct: "soaked", decoy: "drenched", thai: "เปียกมาก" },
-                { very: "Very bad", correct: "atrocious", decoy: "horrible", thai: "แย่มาก (อีกคำ)" },
-                { very: "Very wicked", correct: "evil", decoy: "vicious", thai: "ชั่วร้ายมาก" },
+            { level: 9, title: "Level 9: Describing People", questions: [
+                { main: "VERY FAT", thai: "อ้วนมาก", correct: "OBESE", correctThai: "อ้วนเกินไป", decoy: "CHUBBY" },
+                { main: "VERY THIN", thai: "ผอมมาก", correct: "SKELETAL", correctThai: "เหมือนโครงกระดูก", decoy: "SLIM" },
+                { main: "VERY FUNNY", thai: "ตลกมาก", correct: "HILARIOUS", correctThai: "เฮฮา", decoy: "AMUSING" },
+                { main: "VERY SERIOUS", thai: "จริงจังมาก", correct: "SOLEMN", correctThai: "เคร่งขรึม", decoy: "GRAVE" },
+                { main: "VERY MEAN", thai: "ใจร้ายมาก", correct: "CRUEL", correctThai: "โหดร้าย", decoy: "NASTY" },
+                { main: "VERY LAZY", thai: "ขี้เกียจมาก", correct: "INDOLENT", correctThai: "เกียจคร้าน", decoy: "SLOTHFUL" },
+                { main: "VERY BUSY", thai: "ยุ่งมาก", correct: "SWAMPED", correctThai: "ท่วมท้นด้วยงาน", decoy: "OCCUPIED" },
+                { main: "VERY TIGHT", thai: "แน่นมาก", correct: "CONSTRICTED", correctThai: "บีบรัด", decoy: "FIRM" },
+                { main: "VERY OPEN", thai: "เปิดเผยมาก", correct: "CANDID", correctThai: "ตรงไปตรงมา", decoy: "FRANK" },
+                { main: "VERY SMART", thai: "ฉลาดมาก", correct: "ASTUTE", correctThai: "หลักแหลม", decoy: "CLEVER" },
             ]},
-            { level: 10, title: "คำคุณศัพท์ชั้นสูง 2", questions: [
-                { very: "Very tired", correct: "exhausted", decoy: "drained", thai: "เหนื่อยมาก (อีกคำ)" },
-                { very: "Very upset", correct: "distressed", decoy: "miserable", thai: "อารมณ์เสียมาก" },
-                { very: "Very useful", correct: "practical", decoy: "beneficial", thai: "มีประโยชน์มาก" },
-                { very: "Very weak", correct: "feeble", decoy: "frail", thai: "อ่อนแอมาก" },
-                { very: "Very white", correct: "pure", decoy: "spotless", thai: "ขาวมาก" },
-                { very: "Very wide", correct: "spacious", decoy: "vast", thai: "กว้างมาก" },
-                { very: "Very wise", correct: "sage", decoy: "judicious", thai: "ฉลาดมาก" },
-                { very: "Very smooth", correct: "sleek", decoy: "polished", thai: "เรียบมาก" },
-                { very: "Very funny", correct: "comical", decoy: "hilarious", thai: "ตลกมาก" },
-                { very: "Very thirsty", correct: "parched", decoy: "dehydrated", thai: "กระหายมาก" },
+            { level: 10, title: "Level 10: Mixed Challenge 1", questions: [
+                { main: "VERY OFTEN", thai: "บ่อยมาก", correct: "CUSTOMARY", correctThai: "เป็นธรรมเนียม", decoy: "USUAL" },
+                { main: "VERY WET", thai: "เปียกมาก", correct: "DRENCHED", correctThai: "เปียกปอน", decoy: "SODDEN" },
+                { main: "VERY EXPENSIVE", thai: "แพงมาก", correct: "COSTLY", correctThai: "ราคาสูง", decoy: "PRICEY" },
+                { main: "VERY CHEAP", thai: "ถูกมาก", correct: "INEXPENSIVE", correctThai: "ราคาไม่แพง", decoy: "LOW-COST" },
+                { main: "VERY COLOURFUL", thai: "มีสีสันมาก", correct: "VIBRANT", correctThai: "มีชีวิตชีวา", decoy: "BRIGHT" },
+                { main: "VERY QUIET", thai: "เงียบมาก", correct: "MUTE", correctThai: "ไร้เสียง", decoy: "SILENT" },
+                { main: "VERY BORING", thai: "น่าเบื่อมาก", correct: "TEDIOUS", correctThai: "น่าเบื่อหน่าย", decoy: "MONOTONOUS" },
+                { main: "VERY SHY", thai: "อายมาก", correct: "TIMID", correctThai: "ขี้อาย", decoy: "RESERVED" },
+                { main: "VERY FAST", thai: "เร็วมาก", correct: "FLEETING", correctThai: "ชั่วแล่น", decoy: "TEMPORARY" },
+                { main: "VERY GOOD", thai: "ดีมาก", correct: "SPLENDID", correctThai: "สวยงาม/ยอดเยี่ยม", decoy: "MARVELOUS" },
             ]},
-            
-            // --- NEW DATA: LEVELS 11-20 (More Advanced Vocabulary) ---
-            { level: 11, title: "ความเข้มข้น/ความแรง", questions: [
-                { very: "Very powerful", correct: "dominant", decoy: "superior", thai: "ทรงพลังมาก/เหนือกว่า" },
-                { very: "Very necessary", correct: "essential", decoy: "required", thai: "จำเป็นมาก" },
-                { very: "Very valuable", correct: "precious", decoy: "worthy", thai: "มีค่ามาก" },
-                { very: "Very weak", correct: "frail", decoy: "delicate", thai: "อ่อนแอมาก" },
-                { very: "Very worried", correct: "distraught", decoy: "concerned", thai: "กังวล/ทุกข์ใจมาก" },
-                { very: "Very often", correct: "frequently", decoy: "repeatedly", thai: "บ่อยมาก" },
-                { very: "Very accurate", correct: "precise", decoy: "exact", thai: "แม่นยำมาก" },
-                { very: "Very true", correct: "authentic", decoy: "genuine", thai: "เป็นจริง/แท้มาก" },
-                { very: "Very certain", correct: "convinced", decoy: "assured", thai: "แน่ใจมาก" },
-                { very: "Very unique", correct: "singular", decoy: "rare", thai: "มีเอกลักษณ์มาก" },
+            // --- HARD LEVELS (11-20) ---
+            { level: 11, title: "Level 11: High Intensity", questions: [
+                { main: "VERY ACCURATE", thai: "แม่นยำมาก", correct: "FLAWLESS", correctThai: "ไร้ข้อผิดพลาด", decoy: "PERFECT" },
+                { main: "VERY BRIGHT", thai: "สว่างมาก", correct: "RESPLENDENT", correctThai: "สุกใส", decoy: "RADIANT" },
+                { main: "VERY CALM", thai: "สงบมาก", correct: "SERENE", correctThai: "เงียบสงบ", decoy: "PEACEFUL" },
+                { main: "VERY DULL", thai: "น่าเบื่อมาก", correct: "BLAND", correctThai: "จืดชืด", decoy: "LACKLUSTER" },
+                { main: "VERY EMPTY", thai: "ว่างเปล่ามาก", correct: "VACANT", correctThai: "ไม่มีคนอยู่", decoy: "HOLLOW" },
+                { main: "VERY FRIGHTENED", thai: "ตกใจกลัวมาก", correct: "PETRIFIED", correctThai: "ตกใจจนเป็นหิน", decoy: "HORRIFIED" },
+                { main: "VERY HAPPY", thai: "มีความสุขมาก", correct: "OVERJOYED", correctThai: "ดีใจมาก", decoy: "ELATED" },
+                { main: "VERY LATE", thai: "สายมาก", correct: "BELATED", correctThai: "ล่าช้า", decoy: "DELAYED" },
+                { main: "VERY NASTY", thai: "น่ารังเกียจมาก", correct: "PUTRID", correctThai: "เน่าเปื่อย", decoy: "FOUL" },
+                { main: "VERY RISKY", thai: "เสี่ยงมาก", correct: "HAZARDOUS", correctThai: "อันตราย", decoy: "PERILOUS" },
             ]},
-            { level: 12, title: "อารมณ์ซับซ้อน 1", questions: [
-                { very: "Very shy", correct: "timid", decoy: "reserved", thai: "ขี้อายมาก" },
-                { very: "Very sad", correct: "doleful", decoy: "mournful", thai: "เศร้ามาก" },
-                { very: "Very eager", correct: "keen", decoy: "impatient", thai: "กระตือรือร้นมาก" },
-                { very: "Very brave", correct: "courageous", decoy: "valiant", thai: "กล้าหาญมาก" },
-                { very: "Very friendly", correct: "amiable", decoy: "pleasant", thai: "เป็นมิตรมาก" },
-                { very: "Very pleased", correct: "delighted", decoy: "content", thai: "พอใจมาก" },
-                { very: "Very cheerful", correct: "blissful", decoy: "merry", thai: "ร่าเริงมาก" },
-                { very: "Very angry", correct: "outraged", decoy: "livid", thai: "โกรธมาก" },
-                { very: "Very cruel", correct: "brutal", decoy: "merciless", thai: "โหดร้ายมาก" },
-                { very: "Very guilty", correct: "culpable", decoy: "faulty", thai: "รู้สึกผิดมาก" },
+            { level: 12, title: "Level 12: Advanced Adjectives 1", questions: [
+                { main: "VERY RUDE", thai: "หยาบคายมาก", correct: "VULGAR", correctThai: "หยาบคาย/ต่ำช้า", decoy: "IMPUDENT" },
+                { main: "VERY SIMPLE", thai: "เรียบง่ายมาก", correct: "UNCOMPLICATED", correctThai: "ไม่ซับซ้อน", decoy: "STRAIGHTFORWARD" },
+                { main: "VERY SCARCE", thai: "หายากมาก", correct: "INSIGNIFICANT", correctThai: "ไม่สำคัญ", decoy: "RARE" },
+                { main: "VERY UGLY", thai: "น่าเกลียดมาก", correct: "HIDEOUS", correctThai: "น่าเกลียดน่ากลัว", decoy: "GROTESQUE" },
+                { main: "VERY WICKED", thai: "ชั่วร้ายมาก", correct: "HEINOUS", correctThai: "โหดเหี้ยม", decoy: "EVIL" },
+                { main: "VERY WEIRD", thai: "แปลกมาก", correct: "ECCENTRIC", correctThai: "แปลกประหลาด", decoy: "BIZARRE" },
+                { main: "VERY WIDE", thai: "กว้างมาก", correct: "IMMENSE", correctThai: "ใหญ่โตมโหฬาร", decoy: "VAST" },
+                { main: "VERY CLEAR", thai: "ชัดเจนมาก", correct: "EVIDENT", correctThai: "เป็นที่ประจักษ์", decoy: "OBVIOUS" },
+                { main: "VERY COLOURFUL", thai: "มีสีสันมาก", correct: "VIVID", correctThai: "สดใส", decoy: "BRIGHT" },
+                { main: "VERY LONG", thai: "ยาวมาก", correct: "EXTENDED", correctThai: "ยืดออกไป", decoy: "LENGTHY" },
             ]},
-            { level: 13, title: "การรับรู้/ลักษณะกายภาพ", questions: [
-                { very: "Very smooth", correct: "sleek", decoy: "polished", thai: "เรียบมาก" },
-                { very: "Very wet", correct: "saturated", decoy: "soggy", thai: "เปียกมาก" },
-                { very: "Very hard", correct: "adamant", decoy: "rigid", thai: "แข็งแกร่งมาก/ดื้อรั้นมาก" },
-                { very: "Very flexible", correct: "supple", decoy: "pliable", thai: "ยืดหยุ่นมาก" },
-                { very: "Very rough", correct: "gritty", decoy: "uneven", thai: "ขรุขระมาก" },
-                { very: "Very dark", correct: "opaque", decoy: "gloomy", thai: "มืด/ทึบมาก" },
-                { very: "Very clear", correct: "lucid", decoy: "coherent", thai: "ชัดเจน/เข้าใจง่ายมาก" },
-                { very: "Very bright", correct: "luminous", decoy: "gleaming", thai: "สว่างมาก" },
-                { very: "Very visible", correct: "apparent", decoy: "obvious", thai: "เห็นได้ชัดมาก" },
-                { very: "Very small", correct: "minuscule", decoy: "infinitesimal", thai: "เล็กมาก" },
+            { level: 13, title: "Level 13: Describing Qualities", questions: [
+                { main: "VERY CROWDED", thai: "แออัดมาก", correct: "OVERRUN", correctThai: "ยุ่งวุ่นวาย", decoy: "JAMMED" },
+                { main: "VERY COWARDLY", thai: "ขี้ขลาดมาก", correct: "TIMOROUS", correctThai: "ขี้กลัว", decoy: "CHICKEN" },
+                { main: "VERY DIFFICULT", thai: "ยากมาก", correct: "EXACTING", correctThai: "ต้องการความแม่นยำสูง", decoy: "CHALLENGING" },
+                { main: "VERY DISTURBING", thai: "รบกวนมาก", correct: "HARROWING", correctThai: "น่าเจ็บปวด", decoy: "UPSETTING" },
+                { main: "VERY FRAGILE", thai: "เปราะบางมาก", correct: "DELICATE", correctThai: "ละเอียดอ่อน", decoy: "BRITTLE" },
+                { main: "VERY GLAD", thai: "ดีใจมาก", correct: "THRILLED", correctThai: "ตื่นเต้นสุดขีด", decoy: "HAPPY" },
+                { main: "VERY HARD", thai: "แข็งมาก", correct: "ADAMANT", correctThai: "แน่วแน่", decoy: "FIRM" },
+                { main: "VERY HIGH", thai: "สูงมาก", correct: "LOFTY", correctThai: "สูงส่ง", decoy: "ELEVATED" },
+                { main: "VERY KIND", thai: "ใจดีมาก", correct: "GRACIOUS", correctThai: "สง่างาม", decoy: "BENEVOLENT" },
+                { main: "VERY NEAR", thai: "ใกล้มาก", correct: "IMMINENT", correctThai: "จวนเจียน", decoy: "CLOSE" },
             ]},
-            { level: 14, title: "ความคิด/สติปัญญา", questions: [
-                { very: "Very smart", correct: "astute", decoy: "shrewd", thai: "ฉลาดมาก" },
-                { very: "Very clever", correct: "ingenious", decoy: "inventive", thai: "ฉลาด/มีไหวพริบมาก" },
-                { very: "Very foolish", correct: "imbecilic", decoy: "dumb", thai: "โง่มาก" },
-                { very: "Very wise", correct: "erudite", decoy: "learned", thai: "มีปัญญา/รอบรู้มาก" },
-                { very: "Very difficult", correct: "formidable", decoy: "challenging", thai: "ยากมาก/น่าเกรงขาม" },
-                { very: "Very careful", correct: "meticulous", decoy: "thorough", thai: "ละเอียดถี่ถ้วนมาก" },
-                { very: "Very lazy", correct: "indolent", decoy: "listless", thai: "ขี้เกียจมาก" },
-                { very: "Very quick", correct: "alacritous", decoy: "nimble", thai: "เร็วมาก/กระฉับกระเฉง" },
-                { very: "Very mysterious", correct: "enigmatic", decoy: "cryptic", thai: "ลึกลับมาก" },
-                { very: "Very complex", correct: "intricate", decoy: "convoluted", thai: "ซับซ้อนมาก" },
+            { level: 14, title: "Level 14: Adjective Deep Dive 2", questions: [
+                { main: "VERY OLD-FASHIONED", thai: "ล้าสมัยมาก", correct: "ARCHAIC", correctThai: "โบราณ", decoy: "OUTDATED" },
+                { main: "VERY PERFECT", thai: "สมบูรณ์แบบมาก", correct: "UNBLEMISHED", correctThai: "ไม่มีรอยตำหนิ", decoy: "IMPECCABLE" },
+                { main: "VERY PLAIN", thai: "ธรรมดามาก", correct: "MONOTONOUS", correctThai: "น่าเบื่อซ้ำซาก", decoy: "ORDINARY" },
+                { main: "VERY POWERFUL", thai: "มีอำนาจมาก", correct: "OMNIPOTENT", correctThai: "มีอำนาจทุกอย่าง", decoy: "ALMIGHTY" },
+                { main: "VERY PRETTY", thai: "สวยมาก", correct: "EXQUISITE", correctThai: "วิจิตร", decoy: "GORGEOUS" },
+                { main: "VERY SERIOUS", thai: "จริงจังมาก", correct: "GRAVE", correctThai: "ร้ายแรง", decoy: "SOLEMN" },
+                { main: "VERY SHY", thai: "อายมาก", correct: "RETIRING", correctThai: "ชอบเก็บตัว", decoy: "BASHFUL" },
+                { main: "VERY STRANGE", thai: "แปลกมาก", correct: "UNNATURAL", correctThai: "ผิดธรรมชาติ", decoy: "PECULIAR" },
+                { main: "VERY SURE", thai: "แน่ใจมาก", correct: "CONVINCED", correctThai: "เชื่อมั่น", decoy: "CERTAIN" },
+                { main: "VERY UGLY", thai: "น่าเกลียดมาก", correct: "OFFENSIVE", correctThai: "ดูหมิ่น", decoy: "REPULSIVE" },
             ]},
-            { level: 15, title: "พฤติกรรม/การกระทำ", questions: [
-                { very: "Very perfect", correct: "flawless", decoy: "ideal", thai: "สมบูรณ์แบบมาก" },
-                { very: "Very rich", correct: "opulent", decoy: "prosperous", thai: "ร่ำรวยมาก" },
-                { very: "Very poor", correct: "impoverished", decoy: "indigent", thai: "ยากจนมาก" },
-                { very: "Very greedy", correct: "avaricious", decoy: "grasping", thai: "โลภมาก" },
-                { very: "Very noisy", correct: "raucous", decoy: "tumultuous", thai: "เสียงดังมาก" },
-                { very: "Very quiet", correct: "inaudible", decoy: "muted", thai: "เงียบมาก" },
-                { very: "Very famous", correct: "renowned", decoy: "celebrated", thai: "มีชื่อเสียงมาก" },
-                { very: "Very shocking", correct: "appalling", decoy: "horrifying", thai: "น่าตกใจมาก" },
-                { very: "Very good", correct: "exquisite", decoy: "magnificent", thai: "ดีมาก/วิจิตรมาก" },
-                { very: "Very mean", correct: "malicious", decoy: "vile", thai: "ใจร้ายมาก" },
+            { level: 15, title: "Level 15: Intense States", questions: [
+                { main: "VERY ANGRY", thai: "โกรธมาก", correct: "IRATE", correctThai: "โกรธแค้น", decoy: "ENRAGED" },
+                { main: "VERY BIG", thai: "ใหญ่มาก", correct: "GIGANTIC", correctThai: "ใหญ่ยักษ์", decoy: "COLOSSAL" },
+                { main: "VERY BRIGHT", thai: "สว่างมาก", correct: "LUMINESCENT", correctThai: "เปล่งแสง", decoy: "SHINING" },
+                { main: "VERY BUSY", thai: "ยุ่งมาก", correct: "ENGROSSED", correctThai: "หมกมุ่น", decoy: "ABSORBED" },
+                { main: "VERY COLD", thai: "หนาวมาก", correct: "GLACIAL", correctThai: "เหมือนน้ำแข็ง", decoy: "ARCTIC" },
+                { main: "VERY CLEAN", thai: "สะอาดมาก", correct: "STERILE", correctThai: "ปลอดเชื้อ", decoy: "PURE" },
+                { main: "VERY CRUEL", thai: "โหดร้ายมาก", correct: "BRUTAL", correctThai: "ทารุณ", decoy: "MERCILESS" },
+                { main: "VERY CUTE", thai: "น่ารักมาก", correct: "ENDEARING", correctThai: "เป็นที่รัก", decoy: "CHARMING" },
+                { main: "VERY DEEP", thai: "ลึกมาก", correct: "ABYSSAL", correctThai: "ก้นบึ้ง", decoy: "PROFOUND" },
+                { main: "VERY DRY", thai: "แห้งมาก", correct: "DESICCATED", correctThai: "ทำให้แห้งสนิท", decoy: "ARID" },
             ]},
-            { level: 16, title: "ขนาด/ปริมาณเชิงลบ", questions: [
-                { very: "Very big", correct: "gargantuan", decoy: "colossal", thai: "ใหญ่โตมาก" },
-                { very: "Very small", correct: "diminutive", decoy: "petite", thai: "เล็กมาก" },
-                { very: "Very deep", correct: "abysmal", decoy: "bottomless", thai: "ลึกมาก/แย่มาก" },
-                { very: "Very high", correct: "celestial", decoy: "elevated", thai: "สูงมาก/เกี่ยวกับสวรรค์" },
-                { very: "Very old", correct: "obsolete", decoy: "antiquated", thai: "เก่ามาก/ล้าสมัย" },
-                { very: "Very young", correct: "juvenile", decoy: "adolescent", thai: "อ่อนเยาว์มาก" },
-                { very: "Very boring", correct: "tedious", decoy: "monotonous", thai: "น่าเบื่อมาก" },
-                { very: "Very crowded", correct: "teeming", decoy: "swarming", thai: "หนาแน่นมาก" },
-                { very: "Very narrow", correct: "constricted", decoy: "tapered", thai: "แคบมาก" },
-                { very: "Very wide", correct: "capacious", decoy: "extensive", thai: "กว้างมาก" },
+            { level: 16, title: "Level 16: Abstract Intensifiers", questions: [
+                { main: "VERY EXACT", thai: "แน่นอนมาก", correct: "INDISPUTABLE", correctThai: "เถียงไม่ได้", decoy: "ACCURATE" },
+                { main: "VERY FAST", thai: "เร็วมาก", correct: "HASTY", correctThai: "เร่งรีบ", decoy: "SWIFT" },
+                { main: "VERY FINE", thai: "ละเอียดมาก", correct: "IMPERCEPTIBLE", correctThai: "สังเกตไม่ได้", decoy: "SUBTLE" },
+                { main: "VERY FUNNY", thai: "ตลกมาก", correct: "WAGGISH", correctThai: "ตลกคะนอง", decoy: "JOCULAR" },
+                { main: "VERY GOOD", thai: "ดีมาก", correct: "IMPECCABLE", correctThai: "ไร้ที่ติ", decoy: "FAULTLESS" },
+                { main: "VERY HEAVY", thai: "หนักมาก", correct: "LUMBERING", correctThai: "อุ้ยอ้าย", decoy: "CUMBERSOME" },
+                { main: "VERY HURTFUL", thai: "เจ็บปวดมาก", correct: "CAUSTIC", correctThai: "กัดกร่อน", decoy: "ACRIMONIOUS" },
+                { main: "VERY IMPORTANT", thai: "สำคัญมาก", correct: "MONUMENTAL", correctThai: "ยิ่งใหญ่", decoy: "CRITICAL" },
+                { main: "VERY KIND", thai: "ใจดีมาก", correct: "BENIGN", correctThai: "ไม่เป็นอันตราย", decoy: "COMPASSIONATE" },
+                { main: "VERY LITTLE", thai: "น้อยมาก", correct: "INCONSEQUENTIAL", correctThai: "ไม่สำคัญ", decoy: "MINUTE" },
             ]},
-            { level: 17, title: "คำกริยาคุณศัพท์", questions: [
-                { very: "Very common", correct: "ubiquitous", decoy: "prevalent", thai: "พบได้ทั่วไปมาก" },
-                { very: "Very available", correct: "accessible", decoy: "obtainable", thai: "พร้อมใช้งานมาก" },
-                { very: "Very important", correct: "momentous", decoy: "critical", thai: "สำคัญมาก" },
-                { very: "Very useless", correct: "futile", decoy: "vain", thai: "ไร้ประโยชน์มาก" },
-                { very: "Very delicious", correct: "palatable", decoy: "luscious", thai: "อร่อยมาก" },
-                { very: "Very beautiful", correct: "gorgeous", decoy: "stunning", thai: "สวยมาก" },
-                { very: "Very ugly", correct: "ghastly", decoy: "repugnant", thai: "น่าเกลียดมาก" },
-                { very: "Very weak", correct: "vulnerable", decoy: "susceptible", thai: "อ่อนแอ/เปราะบางมาก" },
-                { very: "Very protective", correct: "vigilant", decoy: "watchful", thai: "ปกป้องมาก/ระมัดระวัง" },
-                { very: "Very safe", correct: "secure", decoy: "invulnerable", thai: "ปลอดภัยมาก" },
+            { level: 17, title: "Level 17: Extreme Descriptions", questions: [
+                { main: "VERY LOUD", thai: "ดังมาก", correct: "EAR-SPLITTING", correctThai: "ดังจนแก้วหูแตก", decoy: "PIERCING" },
+                { main: "VERY MISERABLE", thai: "ทุกข์ระทมมาก", correct: "WRETCHED", correctThai: "อนาถ", decoy: "DEPLORABLE" },
+                { main: "VERY MEAN", thai: "ใจร้ายมาก", correct: "VINDICTIVE", correctThai: "อาฆาต", decoy: "SPITEFUL" },
+                { main: "VERY MYSTERIOUS", thai: "ลึกลับมาก", correct: "ENIGMATIC", correctThai: "เป็นปริศนา", decoy: "CRYPTIC" },
+                { main: "VERY NAIVE", thai: "ซื่อมาก", correct: "GULLIBLE", correctThai: "ถูกหลอกง่าย", decoy: "INNOCENT" },
+                { main: "VERY NASTY", thai: "น่ารังเกียจมาก", correct: "ODIOUS", correctThai: "น่าชัง", decoy: "ABHORRENT" },
+                { main: "VERY OLD", thai: "เก่ามาก", correct: "ANTIQUE", correctThai: "ของเก่า", decoy: "VINTAGE" },
+                { main: "VERY QUICK", thai: "รวดเร็วมาก", correct: "INSTANTANEOUS", correctThai: "ทันทีทันใด", decoy: "IMMEDIATE" },
+                { main: "VERY RARE", thai: "หายากมาก", correct: "UNCOMMON", correctThai: "ไม่ปกติ", decoy: "INFREQUENT" },
+                { main: "VERY SHOCKED", thai: "ตกใจมาก", correct: "AGHAST", correctThai: "ตกใจกลัว", decoy: "APPALLED" },
             ]},
-            { level: 18, title: "ขั้นสูง/วรรณกรรม", questions: [
-                { very: "Very colorful", correct: "resplendent", decoy: "glistening", thai: "มีสีสัน/แวววาวมาก" },
-                { very: "Very easy", correct: "facile", decoy: "effortless", thai: "ง่ายมาก" },
-                { very: "Very true", correct: "indubitable", decoy: "unquestionable", thai: "เป็นจริง/ไม่ต้องสงสัยเลย" },
-                { very: "Very probable", correct: "likely", decoy: "plausible", thai: "เป็นไปได้มาก" },
-                { very: "Very possible", correct: "feasible", decoy: "achievable", thai: "เป็นไปได้มาก" },
-                { very: "Very careful", correct: "prudent", decoy: "judicious", thai: "ระมัดระวัง/รอบคอบมาก" },
-                { very: "Very rude", correct: "obnoxious", decoy: "offensive", thai: "หยาบคายมาก" },
-                { very: "Very tense", correct: "strained", decoy: "tight", thai: "ตึงเครียดมาก" },
-                { very: "Very generous", correct: "magnanimous", decoy: "benevolent", thai: "ใจกว้างมาก" },
-                { very: "Very sincere", correct: "earnest", decoy: "heartfelt", thai: "จริงใจมาก" },
+            { level: 18, title: "Level 18: Adverbial Intensifiers", questions: [
+                { main: "VERY BADLY", thai: "แย่มาก", correct: "TERRIBLY", correctThai: "อย่างน่ากลัว", decoy: "HORRIBLY" },
+                { main: "VERY CLEARLY", thai: "ชัดเจนมาก", correct: "LUCIDLY", correctThai: "อย่างชัดแจ้ง", decoy: "EXPLICITLY" },
+                { main: "VERY COMPLETELY", thai: "สมบูรณ์มาก", correct: "WHOLLY", correctThai: "ทั้งหมด", decoy: "ENTIRELY" },
+                { main: "VERY DIFFERENTLY", thai: "แตกต่างมาก", correct: "RADICALLY", correctThai: "อย่างสิ้นเชิง", decoy: "FUNDAMENTALLY" },
+                { main: "VERY EQUALLY", thai: "เท่ากันมาก", correct: "IDENTICALLY", correctThai: "เหมือนกันทุกประการ", decoy: "UNIFORMLY" },
+                { main: "VERY FINALLY", thai: "ท้ายที่สุดมาก", correct: "ULTIMATELY", correctThai: "ในที่สุด", decoy: "EVENTUALLY" },
+                { main: "VERY FORMALLY", thai: "เป็นทางการมาก", correct: "STRICTLY", correctThai: "อย่างเข้มงวด", decoy: "RIGIDLY" },
+                { main: "VERY NEARLY", thai: "เกือบมาก", correct: "ALMOST", correctThai: "เกือบจะ", decoy: "APPROXIMATELY" },
+                { main: "VERY PUBLICLY", thai: "เปิดเผยมาก", correct: "OVERTLY", correctThai: "อย่างเปิดเผย", decoy: "BLATANTLY" },
+                { main: "VERY QUICKLY", thai: "รวดเร็วมาก", correct: "EXPEDITIOUSLY", correctThai: "อย่างรวดเร็ว", decoy: "PROMPTLY" },
             ]},
-            { level: 19, title: "สภาวะจิตใจ/ร่างกาย", questions: [
-                { very: "Very tired", correct: "enervated", decoy: "languid", thai: "เหนื่อยมาก/อ่อนแรง" },
-                { very: "Very hungry", correct: "ravenous", decoy: "voracious", thai: "หิวมาก" },
-                { very: "Very thirsty", correct: "arid", decoy: "dry", thai: "กระหายมาก/แห้งแล้งมาก" },
-                { very: "Very calm", correct: "tranquil", decoy: "placid", thai: "สงบมาก" },
-                { very: "Very confused", correct: "baffled", decoy: "bewildered", thai: "สับสนมาก" },
-                { very: "Very amazed", correct: "stupefied", decoy: "astonished", thai: "ประหลาดใจมาก" },
-                { very: "Very strange", correct: "peculiar", decoy: "odd", thai: "แปลกมาก" },
-                { very: "Very familiar", correct: "intimate", decoy: "acquainted", thai: "คุ้นเคยมาก" },
-                { very: "Very good-looking", correct: "dapper", decoy: "debonair", thai: "ดูดีมาก (ชาย)" },
-                { very: "Very happy", correct: "exuberant", decoy: "rapturous", thai: "มีความสุขมาก" },
+            { level: 19, title: "Level 19: Figurative Language", questions: [
+                { main: "VERY BRUTAL", thai: "ทารุณมาก", correct: "ATROCIOUS", correctThai: "ป่าเถื่อน", decoy: "SAVAGE" },
+                { main: "VERY DESIRABLE", thai: "เป็นที่ต้องการมาก", correct: "COVETED", correctThai: "เป็นที่ปรารถนา", decoy: "INTRIGUING" },
+                { main: "VERY GOOD", thai: "ดีมาก", correct: "MARVELOUS", correctThai: "มหัศจรรย์", decoy: "WONDERFUL" },
+                { main: "VERY INTERESTING", thai: "น่าสนใจมาก", correct: "RIVETING", correctThai: "ตรึงตาตรึงใจ", decoy: "ABSORBING" },
+                { main: "VERY LIKELY", thai: "เป็นไปได้มาก", correct: "PROBABLE", correctThai: "น่าจะเป็น", decoy: "FEASIBLE" },
+                { main: "VERY SAD", thai: "เศร้ามาก", correct: "GLOOMY", correctThai: "มืดมน", decoy: "DEJECTED" },
+                { main: "VERY SHARP", thai: "คมมาก", correct: "PIERCING", correctThai: "บาดทะลุ", decoy: "PENETRATING" },
+                { main: "VERY STYLISH", thai: "มีสไตล์มาก", correct: "ELEGANT", correctThai: "สง่างาม", decoy: "CHIC" },
+                { main: "VERY TIRED", thai: "เหนื่อยมาก", correct: "DRAGGED", correctThai: "ลาก/เหนื่อยล้า", decoy: "WORN-OUT" },
+                { main: "VERY WEAK", thai: "อ่อนแอมาก", correct: "LIMP", correctThai: "อ่อนปวกเปียก", decoy: "FLOPPY" },
             ]},
-            { level: 20, title: "สุดยอดคำคุณศัพท์", questions: [
-                { very: "Very hot", correct: "searing", decoy: "fiery", thai: "ร้อนมาก/แผดเผา" },
-                { very: "Very cold", correct: "frigid", decoy: "glacial", thai: "หนาวมาก/เยือกเย็น" },
-                { very: "Very clean", correct: "immaculate", decoy: "pristine", thai: "สะอาดมาก" },
-                { very: "Very full", correct: "brimming", decoy: "saturated", thai: "เต็มมาก" },
-                { very: "Very exciting", correct: "exhilarating", decoy: "stimulating", thai: "น่าตื่นเต้นมาก" },
-                { very: "Very easy", correct: "trivial", decoy: "insignificant", thai: "ง่ายมาก/ไม่สำคัญมาก" },
-                { very: "Very difficult", correct: "herculean", decoy: "onerous", thai: "ยากมาก/ต้องใช้กำลังมหาศาล" },
-                { very: "Very happy", correct: "ecstatic", decoy: "euphoric", thai: "มีความสุขมาก" },
-                { very: "Very sad", correct: "despondent", decoy: "forlorn", thai: "เศร้ามาก/หดหู่มาก" },
-                { very: "Very old-fashioned", correct: "archaic", decoy: "outmoded", thai: "ล้าสมัยมาก" },
+            { level: 20, title: "Level 20: Ultimate Challenge", questions: [
+                { main: "VERY BORING", thai: "น่าเบื่อมาก", correct: "WASHED-OUT", correctThai: "ซีดจาง/ไร้สีสัน", decoy: "LIFESLESS" },
+                { main: "VERY HAPPY", thai: "มีความสุขมาก", correct: "EUPHORIC", correctThai: "อิ่มเอม", decoy: "JOYOUS" },
+                { main: "VERY MAD", thai: "บ้ามาก", correct: "DERANGED", correctThai: "เสียสติ", decoy: "LUNATIC" },
+                { main: "VERY PRECISE", thai: "แม่นยำมาก", correct: "SCRUPULOUS", correctThai: "พิถีพิถัน", decoy: "PAINSTAKING" },
+                { main: "VERY SCARY", thai: "น่ากลัวมาก", correct: "HAUNTING", correctThai: "หลอกหลอน", decoy: "SINISTER" },
+                { main: "VERY SMALL", thai: "เล็กมาก", correct: "MINUSCULE", correctThai: "เล็กจิ๋ว", decoy: "PUNY" },
+                { main: "VERY STRONG", thai: "แข็งแรงมาก", correct: "ROBUST", correctThai: "ทนทาน", decoy: "MIGHTY" },
+                { main: "VERY TALL", thai: "สูงมาก", correct: "CRAGGY", correctThai: "ขรุขระ (สูงชัน)", decoy: "SHEER" },
+                { main: "VERY WORRIED", thai: "กังวลมาก", correct: "DISTRAUGHT", correctThai: "จิตใจว้าวุ่น", decoy: "BESIDE" },
+                { main: "VERY WIDE", thai: "กว้างมาก", correct: "COMPREHENSIVE", correctThai: "ครอบคลุม", decoy: "ALL-ENCOMPASSING" },
             ]},
         ];
 
 
-        // --- ELEMENTS ---
+        // --- CONSTANTS (UNCHANGED from Antonyms) ---
+        const NORMAL_TIMER_MS = 5000; 
+        const AUTO_PLAY_TIMER_MS = 3500; // 3.5 วินาที
+        const AUTO_PLAY_PRE_REVEAL_DELAY_MS = 500;
+        const AUTO_PLAY_POST_SPEECH_DELAY_MS = 1500;
+        
+        // --- DOM Elements ---
         const mainContainer = document.getElementById('main-container');
-        const levelSelectScreen = document.getElementById('level-select-screen');
-        const gameScreen = document.getElementById('game-screen');
         const levelGridEl = document.getElementById('level-grid');
-
+        const modeLevelTitleEl = document.getElementById('mode-level-title');
+        const startNormalBtn = document.getElementById('start-normal-btn');
+        const startAutoBtn = document.getElementById('start-auto-btn');
+        const backToLevelBtn = document.getElementById('back-to-level-btn');
         const levelTitleEl = document.getElementById('level-title');
         const qCountEl = document.getElementById('q-count');
         const scoreEl = document.getElementById('score');
@@ -534,58 +696,52 @@
         const choiceA = document.getElementById('choice-A');
         const choiceB = document.getElementById('choice-B');
         const nextBtn = document.getElementById('next-btn');
+        const autoToggleBtn = document.getElementById('auto-toggle-btn');
+        const gameFooterEl = document.getElementById('game-footer');
         const choiceButtons = [choiceA, choiceB];
 
         // --- GAME STATE ---
         let currentLevelData = null;
+        let selectedLevelId = null;
         let currentQuizIndex = 0;
         let score = 0;
         let timerTimeout = null;
+        let autoPlayTimeout = null;
         let isAnswered = false;
+        let isAutoPlay = false;
+        let isSpeaking = false;
+        let startedInAuto = false;
+        let manualAnswerGiven = false; 
         let voices = [];
         let audioContext;
 
-        // --- CORE FUNCTIONS (AUDIO TONE - Simplified) ---
+        // --- CORE FUNCTIONS (AUDIO TONE) ---
         function initAudioContext() {
             if (!audioContext) {
-                // Initialize on user interaction
                 audioContext = new (window.AudioContext || window.webkitAudioContext)();
             }
         }
-        
         function createTone(frequency, duration, type, volume = 0.5, startFreq = null) {
             initAudioContext();
             if (!audioContext || audioContext.state === 'suspended') return;
-            
             const oscillator = audioContext.createOscillator();
             const gainNode = audioContext.createGain();
-
             oscillator.connect(gainNode);
             gainNode.connect(audioContext.destination);
-
             if (startFreq) {
                 oscillator.frequency.setValueAtTime(startFreq, audioContext.currentTime);
                 oscillator.frequency.linearRampToValueAtTime(frequency, audioContext.currentTime + duration * 0.5);
             } else {
-                 oscillator.frequency.setValueAtTime(frequency, audioContext.currentTime);
+                oscillator.frequency.setValueAtTime(frequency, audioContext.currentTime);
             }
-            
-            oscillator.type = type; 
-
+            oscillator.type = type;
             gainNode.gain.setValueAtTime(volume, audioContext.currentTime);
             gainNode.gain.exponentialRampToValueAtTime(0.00001, audioContext.currentTime + duration);
-
             oscillator.start();
             oscillator.stop(audioContext.currentTime + duration);
         }
-
-        function playCorrectTone() {
-            createTone(880, 0.15, 'sine', 0.8, 660); 
-        }
-
-        function playFailTone() {
-            createTone(150, 0.4, 'triangle', 0.7, 200); 
-        }
+        function playCorrectTone() { createTone(880, 0.15, 'sine', 0.8, 660); }
+        function playFailTone() { createTone(150, 0.4, 'triangle', 0.7, 200); }
 
         // --- CORE FUNCTIONS (SPEECH SYNTHESIS) ---
         function setupSpeech() {
@@ -595,44 +751,52 @@
                 };
             }
         }
-        
-        function getVoice(lang) {
-             // Prioritize US English voice for English prompts
-            if (lang === 'en-US') {
-                return voices.find(v => v.lang.startsWith('en-US') && (v.name.includes('Samantha') || v.name.includes('Google US English'))) || voices.find(v => v.lang.startsWith('en'));
-            } 
-            return null; // No need for Thai voice
-        }
 
         function speakText(text, lang, onEndCallback = null) {
-            if (!('speechSynthesis' in window)) {
-                if(onEndCallback) onEndCallback();
-                return;
+            if (!('speechSynthesis' in window)) return;
+            if (isSpeaking) {
+                window.speechSynthesis.cancel();
             }
-            window.speechSynthesis.cancel();
             const utterance = new SpeechSynthesisUtterance(text);
             utterance.lang = lang;
-            utterance.rate = 0.8; 
-            utterance.volume = 1;
-
-            const targetVoice = getVoice(lang);
-            if (targetVoice) {
-                utterance.voice = targetVoice;
-            }
-
-            utterance.onend = onEndCallback;
-            utterance.onerror = onEndCallback;
             
+            // Find an English voice (en-US or en-GB)
+            const preferredVoice = voices.find(v => v.lang.startsWith('en-'));
+            if (preferredVoice) {
+                utterance.voice = preferredVoice;
+            } else {
+                // Default to a known good lang code if no voice found
+                utterance.lang = 'en-US'; 
+            }
+            
+            isSpeaking = true;
+            utterance.onend = () => {
+                isSpeaking = false;
+                if (onEndCallback) onEndCallback();
+            };
             window.speechSynthesis.speak(utterance);
         }
-
+        
         // --- UI & SCREEN MANAGEMENT ---
-
         function showScreen(id) {
             document.querySelectorAll('.screen').forEach(screen => {
                 screen.classList.remove('active');
             });
             document.getElementById(id).classList.add('active');
+        }
+
+        function setupModeSelection(levelId) {
+            selectedLevelId = levelId;
+            const levelData = allQuizData.find(data => data.level === levelId);
+            modeLevelTitleEl.textContent = `Level ${levelId}: ${levelData.title}`;
+
+            // Apply Theme (L11-20 is hard-theme/Purple-Pink)
+            if (levelId >= 11) {
+                mainContainer.classList.add('hard-theme');
+            } else {
+                mainContainer.classList.remove('hard-theme');
+            }
+            showScreen('mode-select-screen');
         }
 
         function createLevelButtons() {
@@ -641,201 +805,338 @@
                 const btn = document.createElement('button');
                 btn.className = 'level-btn';
                 btn.textContent = `Level ${data.level}`;
-                
                 const titleSpan = document.createElement('span');
                 titleSpan.className = 'level-btn-title';
                 titleSpan.textContent = data.title;
-                
                 btn.appendChild(titleSpan);
                 btn.setAttribute('data-level', data.level);
-                
+
+                // Note: Level button colors are handled by CSS classes/variables. 
+                // Only L11+ needs the hard-theme applied in JS to set the button color.
+                if (data.level >= 11) {
+                    // This adds the hard-theme class temporarily to apply L11-20 color
+                    // for the button on the selection screen.
+                    btn.classList.add('hard-theme-temp'); 
+                }
+
                 btn.addEventListener('click', () => {
-                    // Resume audio context on user interaction for some browsers
-                    initAudioContext(); 
+                    initAudioContext();
                     if (audioContext && audioContext.state === 'suspended') {
-                         audioContext.resume();
+                        audioContext.resume();
                     }
-                    startLevel(data.level);
+                    setupModeSelection(data.level);
                 });
                 levelGridEl.appendChild(btn);
             });
+            // Clean up temporary class after creation (optional, but good practice)
+            document.querySelectorAll('.level-btn.hard-theme-temp').forEach(btn => {
+                btn.classList.remove('hard-theme-temp');
+            });
         }
 
-        function updateStatusBar() {
-            levelTitleEl.textContent = `${currentLevelData.title} (Level ${currentLevelData.level})`;
-            qCountEl.textContent = `ข้อ: ${currentQuizIndex}/${currentLevelData.questions.length}`;
-            scoreEl.textContent = `คะแนน: ${score}`;
-        }
-
-        // --- GAME LOGIC ---
-
-        function startLevel(levelId) {
+        function startGame(levelId, autoMode) {
             currentLevelData = allQuizData.find(data => data.level === levelId);
             currentQuizIndex = 0;
             score = 0;
+            isAutoPlay = autoMode;
+            startedInAuto = autoMode; // Track if the game started in Auto mode
+            manualAnswerGiven = false;
+            
+            if (levelId >= 11) {
+                mainContainer.classList.add('hard-theme');
+            } else {
+                mainContainer.classList.remove('hard-theme');
+            }
             
             showScreen('game-screen');
             nextQuestion();
         }
 
+        function updateAutoPlayControls() {
+            if (isAutoPlay) {
+                gameFooterEl.classList.add('auto-mode');
+                autoToggleBtn.classList.add('auto-active');
+                autoToggleBtn.textContent = '⏸️ หยุดเล่น (Auto)';
+                nextBtn.textContent = '⏭️ ข้าม/จบเกม';
+                autoToggleBtn.style.display = 'block';
+            } else {
+                gameFooterEl.classList.remove('auto-mode');
+                autoToggleBtn.classList.remove('auto-active');
+                autoToggleBtn.textContent = '▶️ เริ่มเล่น (Auto)';
+                // Only show Auto button if game started in Auto or if Auto was enabled at some point
+                if (startedInAuto || manualAnswerGiven) {
+                    autoToggleBtn.style.display = 'block';
+                } else {
+                     autoToggleBtn.style.display = 'none';
+                }
+                
+                // Reset Next button text based on game state
+                if (currentQuizIndex >= currentLevelData.questions.length && isAnswered) {
+                    nextBtn.textContent = 'กลับหน้าหลัก (Level Selection)';
+                } else {
+                    nextBtn.textContent = 'ข้อถัดไป/กลับหน้าหลัก';
+                }
+            }
+        }
+        
+        function updateStatusBar() {
+            levelTitleEl.textContent = `${currentLevelData.title}`;
+            qCountEl.textContent = `ข้อ: ${currentQuizIndex}/${currentLevelData.questions.length}`;
+
+            let displayScore = score;
+            // ถ้าอยู่ในโหมด Auto และเริ่มต้นด้วย Auto ให้แสดงเป็นเฉลย
+            if (isAutoPlay && startedInAuto) {
+                displayScore = 'เฉลย'; 
+            } else if (isAutoPlay && !startedInAuto && !manualAnswerGiven) {
+                // ถ้าสลับเข้า Auto กลางคันแต่ยังไม่เคยตอบเอง ให้แสดงคะแนนที่ตอบแล้ว
+            } else {
+                // โหมดปกติหรือตอบเองแล้ว: แสดงคะแนนจริง
+            }
+            scoreEl.textContent = `คะแนน: ${displayScore}`;
+        }
+
         function nextQuestion() {
-            clearTimeout(timerTimeout);
-            window.speechSynthesis.cancel();
-            
             if (currentQuizIndex >= currentLevelData.questions.length) {
-                endGame();
+                showFinalScore();
                 return;
             }
             
-            isAnswered = false;
-            nextBtn.textContent = 'ข้อถัดไป';
-            nextBtn.disabled = true;
+            clearTimeout(timerTimeout);
+            clearTimeout(autoPlayTimeout);
+            window.speechSynthesis.cancel(); 
+            isAnswered = false; 
 
             // Reset UI
             mainPromptEl.style.fontSize = '2.5rem';
-            mainPromptEl.style.color = 'var(--color-primary)';
-            thaiTranslationEl.style.color = 'var(--color-primary)';
+            mainPromptEl.style.color = currentLevelData.level >= 11 ? '#673AB7' : 'var(--color-primary)';
+            thaiTranslationEl.style.color = currentLevelData.level >= 11 ? '#7C4DFF' : '#E91E63'; // Purple/Pink accent
             
             // Ensure buttons are reset from the hidden state
             choiceButtons.forEach(btn => {
                 btn.className = 'choice-button';
-                btn.disabled = false;
                 btn.style.display = 'block';
                 btn.style.height = 'auto';
                 btn.style.padding = '1.5rem';
                 btn.style.margin = '0';
+                btn.disabled = isAutoPlay; // Disable buttons if AutoPlay is active
             });
             
+            nextBtn.disabled = true;
             updateStatusBar();
+            updateAutoPlayControls(); // Update controls for Auto/Normal
+
             setupQuestion(currentLevelData.questions[currentQuizIndex]);
         }
-
+        
         function setupQuestion(q) {
-            mainPromptEl.textContent = q.very;
-            thaiTranslationEl.textContent = `(${q.thai})`; // Display Thai translation
+            mainPromptEl.textContent = q.main;
+            // แสดงคำแปลของคำศัพท์หลักในวงเล็บ
+            thaiTranslationEl.textContent = `(${q.thai})`; 
             
-            // Speak the Main English prompt immediately
-            speakText(q.very, 'en-US');
-
+            // **********************************************
+            // อ่านเฉพาะคำศัพท์ภาษาอังกฤษ 1 ครั้ง (ป้องกันการอ่านซ้ำ)
+            // **********************************************
+            speakText(q.main, 'en-US'); 
+            
             const choices = [q.correct, q.decoy];
-            choices.sort(() => 0.5 - Math.random()); // Randomize button order
-
+            choices.sort(() => 0.5 - Math.random());
+            
             choiceA.textContent = choices[0];
             choiceA.setAttribute('data-correct', choices[0] === q.correct);
             choiceB.textContent = choices[1];
             choiceB.setAttribute('data-correct', choices[1] === q.correct);
-
+            
             startTimer();
         }
 
         function startTimer() {
-            // Reset timer bar CSS transition
+            const durationMs = isAutoPlay ? AUTO_PLAY_TIMER_MS : NORMAL_TIMER_MS;
+            const durationSec = durationMs / 1000;
+            
             timerBarEl.style.transition = 'none';
             timerBarEl.style.width = '100%';
-            
             void timerBarEl.offsetWidth; // Force reflow
-
-            // Start countdown
+            
             setTimeout(() => {
-                timerBarEl.style.transition = 'width 5s linear';
+                timerBarEl.style.transition = `width ${durationSec}s linear`;
                 timerBarEl.style.width = '0%';
             }, 50);
 
             timerTimeout = setTimeout(() => {
                 if (!isAnswered) {
-                    checkAnswer(null); // Timeout
+                    if (isAutoPlay) {
+                        // หน่วงเวลาก่อนเฉลยอัตโนมัติ
+                        setTimeout(() => {
+                            checkAnswer(null, true);
+                        }, AUTO_PLAY_PRE_REVEAL_DELAY_MS);
+                    } else {
+                        checkAnswer(null, false); // หมดเวลาในโหมดปกติ
+                    }
                 }
-            }, 5000); // 5 seconds timer
+            }, durationMs);
         }
 
-        function checkAnswer(selectedBtn) {
-            if (isAnswered) return;
+        // startAutoPlay/stopAutoPlay logic (Reused from Antonyms)
+        function startAutoPlay() {
+            if (isAutoPlay) return;
+            isAutoPlay = true;
+            updateAutoPlayControls();
+            manualAnswerGiven = true; // หากสลับกลับเข้า Auto ถือว่าเคยมีการกระทำแล้ว
+            if (!isAnswered && currentQuizIndex < currentLevelData.questions.length) {
+                window.speechSynthesis.cancel();
+                setupQuestion(currentLevelData.questions[currentQuizIndex]);
+            } else if (isAnswered) {
+                // หากกำลังแสดงเฉลยอยู่ ให้เริ่ม Auto ไปข้อถัดไป
+                 currentQuizIndex++;
+                 nextQuestion();
+            }
+        }
+
+        function stopAutoPlay() {
+            if (!isAutoPlay) return;
+            isAutoPlay = false;
+            clearTimeout(timerTimeout);
+            clearTimeout(autoPlayTimeout);
+            window.speechSynthesis.cancel();
+            manualAnswerGiven = true; // การสลับออกจาก Auto Mode ถือเป็นการกระทำแบบแมนนวล
+            updateAutoPlayControls();
+            
+            // Enable buttons to allow manual answer
+            choiceButtons.forEach(btn => btn.disabled = false); 
+            // Restart timer in normal mode, or just wait if an answer was given
+            if (!isAnswered && currentQuizIndex < currentLevelData.questions.length) {
+                // Note: Timer bar animation will jump because of the duration change
+                startTimer(); 
+            }
+        }
+        
+        function checkAnswer(selectedBtn, isAuto = false) {
+            if (isAnswered && !isAuto) return;
             isAnswered = true;
             clearTimeout(timerTimeout);
+            window.speechSynthesis.cancel();
             
-            timerBarEl.style.transition = 'none';
-            timerBarEl.style.width = '0%'; 
+            const q = currentLevelData.questions[currentQuizIndex];
+            const correctWord = q.correct;
+            const correctThai = q.correctThai;
+            let isCorrect = false;
 
-            const currentQ = currentLevelData.questions[currentQuizIndex];
-            const correctWord = currentQ.correct;
-            const isCorrect = selectedBtn && selectedBtn.getAttribute('data-correct') === 'true';
+            if (isAuto) {
+                // Auto mode logic: always select the correct answer
+                const correctButton = choiceButtons.find(btn => btn.getAttribute('data-correct') === 'true');
+                selectedBtn = correctButton;
+                isCorrect = true;
+            } else {
+                // Manual mode logic
+                isCorrect = selectedBtn && selectedBtn.getAttribute('data-correct') === 'true';
+            }
 
             // 1. Stop reading and play tone
-            window.speechSynthesis.cancel();
             if (isCorrect) {
-                playCorrectTone();
-                score++;
-                mainPromptEl.textContent = '✅ ถูกต้อง!';
-                thaiTranslationEl.textContent = `คำที่ถูกต้อง: ${correctWord} (${currentQ.thai.split('/')[0].trim()})`; // Show Thai word
+                playCorrectTone(); 
+                if (!isAuto) score++; 
+                if (!isAuto) { manualAnswerGiven = true; } 
+                mainPromptEl.textContent = isAuto ? '✅ (Auto) เฉลยคำตอบ' : '✅ ถูกต้อง!';
+                thaiTranslationEl.textContent = `คำตอบ: ${correctWord} (${correctThai})`;
+                thaiTranslationEl.style.color = 'var(--color-correct)';
             } else {
                 playFailTone();
+                if (!isAuto) { manualAnswerGiven = true; } 
                 mainPromptEl.textContent = selectedBtn ? '❌ ผิด!' : 'หมดเวลา!';
-                thaiTranslationEl.textContent = `คำที่ถูกต้อง: ${correctWord} (${currentQ.thai.split('/')[0].trim()})`; // Show Thai word
+                thaiTranslationEl.textContent = `คำตอบที่ถูกต้อง: ${correctWord} (${correctThai})`;
+                thaiTranslationEl.style.color = 'var(--color-wrong)';
             }
             
             // 2. Disable all choices
             choiceButtons.forEach(btn => btn.disabled = true);
-            
-            // 3. Reveal and animate (This will speak the correct English word)
-            revealAnswer(correctWord, selectedBtn);
+
+            // 3. Highlight result
+            if (selectedBtn) {
+                selectedBtn.classList.add(isCorrect ? 'correct' : 'wrong');
+            } else {
+                 // Highlight the correct answer if timeout
+                 const correctButton = choiceButtons.find(btn => btn.getAttribute('data-correct') === 'true');
+                 if(correctButton) correctButton.classList.add('correct');
+            }
             
             // 4. Set Next Button action
             nextBtn.disabled = false;
+            updateStatusBar();
+            updateAutoPlayControls(); 
+            
+            // 5. Reveal and animate
+            const speechEndAction = () => {
+                if (isAutoPlay) {
+                    // จังหวะการเปลี่ยนข้อ 1.5 วินาที หลังพูดจบ
+                    autoPlayTimeout = setTimeout(() => {
+                        currentQuizIndex++;
+                        nextQuestion();
+                    }, AUTO_PLAY_POST_SPEECH_DELAY_MS);
+                }
+            };
+            revealAnswer(correctWord, selectedBtn, isCorrect, speechEndAction); 
         }
 
-        function revealAnswer(correctWord, selectedBtn) {
+        // Change: revealAnswer now takes a callback function
+        function revealAnswer(correctWord, selectedBtn, isCorrect, onSpeechEnd = null) {
             // Speak the correct English word for the reveal
-            speakText(correctWord, 'en-US');
+            speakText(correctWord, 'en-US', onSpeechEnd);
             
+            // Visual feedback
             choiceButtons.forEach(btn => {
-                btn.classList.remove('wrong', 'correct');
-                
-                if (btn.textContent === correctWord) {
-                    btn.classList.add('correct');
-                } else if (selectedBtn && btn === selectedBtn && btn.getAttribute('data-correct') === 'false') {
-                    btn.classList.add('wrong');
-                    btn.style.opacity = '1';
-                    btn.style.height = 'auto';
-                    btn.style.padding = '1.5rem';
-                } else {
+                if (btn !== selectedBtn && btn.getAttribute('data-correct') !== 'true') {
                     btn.classList.add('hidden-on-reveal');
+                } else if (btn.getAttribute('data-correct') === 'true' && !isCorrect) {
+                    btn.classList.add('correct');
                 }
             });
+        }
+        
+        function showFinalScore() {
+            clearTimeout(timerTimeout);
+            clearTimeout(autoPlayTimeout);
+            window.speechSynthesis.cancel();
             
-            if (!selectedBtn || selectedBtn.getAttribute('data-correct') === 'false') {
-                 mainPromptEl.style.fontSize = '2rem';
-                 mainPromptEl.style.color = 'var(--color-wrong)';
+            isAutoPlay = false; // Ensure auto mode is turned off
+            startedInAuto = false;
+            gameFooterEl.classList.remove('auto-mode');
+            autoToggleBtn.style.display = 'none';
+
+            mainPromptEl.style.fontSize = '2rem';
+            thaiTranslationEl.style.fontSize = '1.2rem';
+            thaiTranslationEl.style.marginTop = '1rem';
+            
+            // Only show score if the game was not fully played in Auto Mode
+            if (!manualAnswerGiven) {
+                mainPromptEl.textContent = `🤖 โหมดเฉลยสิ้นสุดลง`;
+                thaiTranslationEl.textContent = `กลับไปหน้าหลักเพื่อเริ่มเกมปกติ`;
+                thaiTranslationEl.style.color = currentLevelData.level >= 11 ? '#673AB7' : 'var(--color-primary)';
             } else {
-                 mainPromptEl.style.fontSize = '2.5rem';
-                 mainPromptEl.style.color = 'var(--color-correct)';
+                mainPromptEl.textContent = `🎉 จบ Level ${currentLevelData.level}!`;
+                const finalScore = score;
+                const totalQuestions = currentLevelData.questions.length;
+                const isPass = finalScore >= totalQuestions / 2; // Pass if score is >= 50%
+                
+                thaiTranslationEl.textContent = `คะแนนสุดท้าย: ${finalScore} / ${totalQuestions} (${isPass ? 'เยี่ยมมาก!' : 'ลองอีกครั้ง'})`;
+                thaiTranslationEl.style.color = isPass ? 'var(--color-correct)' : 'var(--color-wrong)';
+
             }
 
-            updateStatusBar();
-        }
-
-
-        function endGame() {
-            levelTitleEl.textContent = `จบ Level ${currentLevelData.level}!`;
-            qCountEl.textContent = '';
-            
-            mainPromptEl.textContent = `คุณทำได้ ${score}/${currentLevelData.questions.length} ข้อ`;
-            thaiTranslationEl.textContent = 'กลับสู่หน้าหลักเพื่อเริ่มใหม่';
-            
-            mainPromptEl.style.fontSize = '2.5rem';
-            mainPromptEl.style.color = score >= 8 ? 'var(--color-correct)' : 'var(--color-wrong)';
-
-            choiceButtons.forEach(btn => btn.style.display = 'none');
+            choiceButtons.forEach(btn => {
+                 btn.style.display = 'none';
+                 btn.classList.remove('correct', 'wrong');
+            });
             
             nextBtn.textContent = 'กลับหน้าหลัก (Level Selection)';
             nextBtn.disabled = false;
         }
 
-        // --- EVENT LISTENERS ---
+        // --- EVENT LISTENERS (UNCHANGED from Antonyms) ---
         function handleChoiceClick(e) {
             if (audioContext && audioContext.state === 'suspended') {
                  audioContext.resume();
             }
-            if (!isAnswered) {
+            if (!isAnswered && !isAutoPlay) {
                 checkAnswer(e.target);
             }
         }
@@ -845,14 +1146,41 @@
 
         nextBtn.addEventListener('click', () => {
             window.speechSynthesis.cancel();
+            clearTimeout(autoPlayTimeout); 
+            
             if (currentQuizIndex >= currentLevelData.questions.length) {
-                // End game scenario, go back to selection screen
+                // End game / Back to home
                 choiceButtons.forEach(btn => btn.style.display = 'block');
+                mainContainer.classList.remove('hard-theme');
+                isAutoPlay = false; // Reset state
+                startedInAuto = false; // Reset state
+                manualAnswerGiven = false; // Reset state
                 showScreen('level-select-screen');
             } else {
-                // Next question
+                // Normal mode advance / Auto mode skip
                 currentQuizIndex++;
                 nextQuestion();
+            }
+        });
+
+        // Mode Selection Screen Listeners
+        startNormalBtn.addEventListener('click', () => {
+            startGame(selectedLevelId, false);
+        });
+        startAutoBtn.addEventListener('click', () => {
+            startGame(selectedLevelId, true);
+        });
+        backToLevelBtn.addEventListener('click', () => {
+             mainContainer.classList.remove('hard-theme');
+             showScreen('level-select-screen');
+        });
+        
+        // Auto Play Toggle Button Handler
+        autoToggleBtn.addEventListener('click', () => {
+            if (isAutoPlay) {
+                stopAutoPlay();
+            } else {
+                startAutoPlay();
             }
         });
 
